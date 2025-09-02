@@ -1,7 +1,10 @@
 import random
 from PIL import Image
 
-TAMANHOQR = 21
+QRVERSION = 6
+#Versão do QR code, pra ficar mais facil definir o tamanho, eu acho
+
+TAMANHOQR = 21 + ((QRVERSION - 1) * 4)
 # Sempre valor impar para tamanho de QR code!
 
 ESCALA = 10
@@ -58,8 +61,17 @@ def desenhaTimings():
         matrix[QUIETZONE + 8 - 2][(QUIETZONE) + 8 + x] = int(pixel)
         pixel = not pixel
 
+def desenhaTipoDados():
+      tiposDeDados = {
+            "numerico" : [0, 0, 0, 1],
+            "alfanumerico" : [0, 0, 1, 0],
+            "byte" : [0, 1, 0, 0],
+            "kanji" : [1, 0, 0, 0],
+      }
+
 def desenhaFormatInfo():
-      
+      firstLine = [0, 0, 0, 0, 0, 0, 0]
+      secondLine = [0, 0, 0, 0, 0, 0, 0, 0]
 
 def desenhaPadrao():
     desenhaQuietzone()
