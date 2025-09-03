@@ -34,6 +34,13 @@ def desenhaQuietzone():
               if x < QUIETZONE or y < QUIETZONE or x > TAMANHOIMG - (QUIETZONE + 1) or y > TAMANHOIMG - (QUIETZONE + 1) :
                      matrix[y][x] = 1
 
+def codificaByte(palavra):
+      codificado = []
+      hexadecimal = [f"{letra:02X}" for letra in (palavra.encode("latin-1"))]
+      print(hexadecimal)
+      for letraHex in hexadecimal :
+            codificado.append(f"{int(letraHex, 16):08b}")
+      print(codificado)
 def desenhaFinder (x0, y0):
         pattern_finder = [
                [1,1,1,1,1,1,1,1,1],
@@ -68,6 +75,11 @@ def desenhaTipoDados():
             "byte" : [0, 1, 0, 0],
             "kanji" : [1, 0, 0, 0],
       }
+      numeroCaracteres = format(15, "09b")
+      numeroCaracteresLista = list(numeroCaracteres)
+      listaGeral = tiposDeDados["byte"] + numeroCaracteresLista
+      print(listaGeral)
+      codificaByte("Hello, world!")
 
 def desenhaFormatInfo():
       firstLine = [0, 0, 0, 0, 0, 0, 0]
@@ -79,10 +91,11 @@ def desenhaPadrao():
     desenhaFinder((0 + (QUIETZONE - 1)), (TAMANHOIMG - 9 - (QUIETZONE - 1)))
     desenhaFinder((TAMANHOIMG - 9 - (QUIETZONE - 1)), (0 + (QUIETZONE - 1)))
     desenhaTimings()
+    desenhaTipoDados()
 
 
 desenhaPadrao()
 desenhaQrCode()
 
-img.save('teste.png')
-img.show()
+# img.save('teste.png')
+# img.show()
